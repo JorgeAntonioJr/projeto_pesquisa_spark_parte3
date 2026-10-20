@@ -1,0 +1,56 @@
+site_name: "Documentação do Projeto"
+site_description: "Guia completo e detalhado"
+
+# Tema Material com Alternância de Cores (Modo Claro / Escuro)
+theme:
+  name: material
+  language: pt-BR
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    # Modo Claro
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Mudar para Modo Escuro
+    # Modo Escuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: lime
+      toggle:
+        icon: material/weather-night
+        name: Mudar para Modo Claro
+
+# Extensões Markdown Avançadas
+markdown_extensions:
+  - admonition                      # Caixas de aviso/alerta
+  - pymdownx.details                # Blocos de texto retráteis
+  - pymdownx.superfences            # Suporte a diagramas Mermaid e código
+  - pymdownx.highlight:             # Destaque de código
+      anchor_linenums: true
+  - pymdownx.tabbed:
+      alternate_style: true         # Abas de navegação/código
+  - tables                          # Tabelas Markdown
+  - attr_list                       # Ajustes em imagens (tamanho, alinhamento)
+
+# Plugins
+plugins:
+  - search
+  - mermaid2                        # Renderização de diagramas
+
+# Estrutura do Menu Lateral/Abas
+nav:
+  - Início: index.md
+  - Passo a Passo:
+      - Instalação: passo-a-passo/instalacao.md
+      - Configuração: passo-a-passo/configuracao.md
+  - Arquitetura & Fluxos: arquitetura/diagramas.md
