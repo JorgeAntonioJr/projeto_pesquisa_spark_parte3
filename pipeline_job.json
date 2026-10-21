@@ -1,0 +1,90 @@
+{
+  "name": "projeto_spark_medalhao",
+  "run_as": {
+    "user_name": "<seu_email@dominio.com>"
+  },
+  "tasks": [
+    {
+      "task_key": "create_schema_volumes",
+      "description": "Cria schemas e volumes no workspace para landing, bronze, silver e gold",
+      "notebook_task": {
+        "notebook_path": "/Users/<seu_usuario>/projeto_spark3/projeto_pesquisa_spark_parte3/Scripts/Create-Schema-Volumes",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cluster_gold_job",
+      "timeout_seconds": 3600,
+      "max_retries": 1,
+      "retry_on_timeout": false
+    },
+    {
+      "task_key": "implement_bronze",
+      "depends_on": [
+        {
+          "task_key": "create_schema_volumes"
+        }
+      ],
+      "description": "Lê arquivos na camada landing e grava Delta em bronze",
+      "notebook_task": {
+        "notebook_path": "/Users/<seu_usuario>/projeto_spark3/projeto_pesquisa_spark_parte3/Scripts/Implement-Bronze",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cluster_gold_job",
+      "timeout_seconds": 3600,
+      "max_retries": 1,
+      "retry_on_timeout": false
+    },
+    {
+      "task_key": "implement_silver",
+      "depends_on": [
+        {
+          "task_key": "implement_bronze"
+        }
+      ],
+      "description": "Lê bronze, aplica regras e grava silver",
+      "notebook_task": {
+        "notebook_path": "/Users/<seu_usuario>/projeto_spark3/projeto_pesquisa_spark_parte3/Scripts/Implement-Silver",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cluster_gold_job",
+      "timeout_seconds": 3600,
+      "max_retries": 1,
+      "retry_on_timeout": false
+    },
+    {
+      "task_key": "implement_gold",
+      "depends_on": [
+        {
+          "task_key": "implement_silver"
+        }
+      ],
+      "description": "Lê silver, monta dimensões e tabela fato em gold",
+      "notebook_task": {
+        "notebook_path": "/Users/<seu_usuario>/projeto_spark3/projeto_pesquisa_spark_parte3/Scripts/Implement-Gold",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "cluster_gold_job",
+      "timeout_seconds": 3600,
+      "max_retries": 1,
+      "retry_on_timeout": false
+    }
+  ],
+  "job_clusters": [
+    {
+      "job_cluster_key": "cluster_gold_job",
+      "new_cluster": {
+        "spark_version": "15.4.x-scala2.12",
+        "node_type_id": "i3.xlarge",
+        "num_workers": 2,
+        "spark_env_vars": {
+          "PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+        },
+        "data_security_mode": "SINGLE_USER",
+        "auto_termination_minutes": 20
+      }
+    }
+  ],
+  "format": "MULTI_TASK",
+  "trigger": {
+    "pause_status": "UNPAUSED"
+  }
+}
