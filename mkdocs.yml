@@ -38,4 +38,9 @@ nav:
       - 2. Bronze (Ingestão Delta): camadas/bronze.md
       - 3. Silver (Data Quality): camadas/silver.md
       - 4. Gold (Modelagem Kimball): camadas/gold.md
+  - Tópicos Avançados:
+      - Otimização e Delta Lake: avancado/otimizacao.md
+      - Consultas SQL Analíticas: avancado/consultas.md
+      - Governança e Segurança: avancado/seguranca.md
   - Automação & Orquestração: orquestracao/jobs.md
+  - Conclusão & Referências: conclusao.md
