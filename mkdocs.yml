@@ -1,5 +1,6 @@
 site_name: "Trabalho 3 - Lakehouse Databricks & Arquitetura Medalhão"
 site_description: "Documentação completa do Pipeline de Dados no Databricks"
+site_url: "https://jorgeantoniojr.github.io/projeto_pesquisa_spark_parte3/"
 
 theme:
   name: material
