@@ -1,0 +1,41 @@
+site_name: "Trabalho 3 - Lakehouse Databricks & Arquitetura Medalhão"
+site_description: "Documentação completa do Pipeline de Dados no Databricks"
+
+theme:
+  name: material
+  language: pt-BR
+  palette:
+    scheme: slate
+    primary: indigo
+    accent: cyan
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - attr_list
+
+plugins:
+  - search
+  - mermaid2
+
+nav:
+  - Visão Geral: index.md
+  - Camadas Medalhão:
+      - 1. Landing (Extração): camadas/landing.md
+      - 2. Bronze (Ingestão Delta): camadas/bronze.md
+      - 3. Silver (Data Quality): camadas/silver.md
+      - 4. Gold (Modelagem Kimball): camadas/gold.md
+  - Automação & Orquestração: orquestracao/jobs.md
